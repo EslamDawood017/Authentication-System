@@ -1,0 +1,73 @@
+<div class="verify-otp-container">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100 py-5">
+      <div class="col-lg-5 col-md-7 col-sm-10">
+        <div class="verify-otp-card">
+          <div class="verify-otp-header">
+            <div class="icon-circle">
+              <span class="otp-icon">🔐</span>
+            </div>
+            <h2 class="verify-otp-title">Verify OTP</h2>
+            <p class="verify-otp-subtitle">We've sent a 6-digit code to your email. Please enter it below to verify.</p>
+            <p class="email-display" *ngIf="email">
+              <span class="email-label">Email:</span> {{ email }}
+            </p>
+          </div>
+          
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="verify-otp-form">
+            <!-- OTP Input -->
+            <div class="form-group-wrapper">
+              <label class="form-label-custom" for="otp">
+                Enter OTP Code
+              </label>
+              <input 
+                type="text" 
+                id="otp"
+                class="form-control-custom otp-input" 
+                formControlName="otp"
+                placeholder="000000"
+                maxlength="6"
+                [ngClass]="{'is-invalid': submitted && f['otp'].errors, 'is-valid': submitted && !f['otp'].errors && f['otp'].value}"
+              />
+              <div class="error-message" *ngIf="submitted && f['otp'].errors">
+                <small *ngIf="f['otp'].errors['required']">
+                  OTP is required
+                </small>
+                <small *ngIf="f['otp'].errors['minlength']">
+                  OTP must be exactly 6 digits
+                </small>
+              </div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger-custom" *ngIf="errorMessage" role="alert">
+              <span class="alert-icon">⚠</span>
+              <span>{{ errorMessage }}</span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid mt-4">
+              <button 
+                type="submit" 
+                class="btn btn-verify"
+                [disabled]="form.invalid && submitted"
+              >
+                <span *ngIf="!submitted || form.valid">Verify OTP</span>
+                <span *ngIf="submitted && form.invalid">Please fix errors</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Back Link -->
+          <div class="verify-otp-footer">
+            <p class="text-center mb-0">
+              Didn't receive the code? 
+              <a href="/forgot-password" class="back-link">Resend OTP</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,99 @@
+<app-nav></app-nav>
+<div class="dashboard-container">
+  <div class="container-fluid px-4 py-5">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header" *ngIf="!loading && !error">
+      <div class="header-container">
+        <h1 class="dashboard-title">Product Dashboard</h1>
+        <p class="dashboard-subtitle">Browse and manage our complete product catalog</p>
+        
+        <div class="header-search-section">
+          <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="text" 
+              class="search-input" 
+              placeholder="Search products..."
+            />
+          </div>
+          <button class="btn-search">
+            <span class="btn-text">Search</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner-wrapper">
+        <div class="spinner-border-custom" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="loading-text">Loading products...</p>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="error-container">
+      <div class="alert alert-danger-custom" role="alert">
+        <div class="alert-content">
+          <span class="alert-icon">⚠</span>
+          <div>
+            <h4 class="alert-title">Error Loading Products</h4>
+            <p class="alert-message">{{ error }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div *ngIf="!loading && !error" class="products-section">
+      <div class="row g-4" *ngIf="products.length > 0">
+        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let product of products">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <img
+                [src]="product.thumbnail"
+                class="product-image"
+                [alt]="product.title"
+                loading="lazy"
+              />
+              <div class="product-overlay">
+                <span class="view-details">View Details</span>
+              </div>
+              <div class="category-badge">
+                {{ product.category }}
+              </div>
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">{{ product.title }}</h3>
+              <p class="product-description">
+                {{ product.description.length > 100 ? product.description.substring(0, 100) + '...' : product.description }}
+              </p>
+              <div class="product-footer">
+                <div class="price-section">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">${{ product.price }}</span>
+                </div>
+                <button class="btn-add-to-cart">
+                  <span class="btn-icon">🛒</span>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="products.length === 0" class="empty-state">
+        <div class="empty-state-content">
+          <span class="empty-icon">📦</span>
+          <h3 class="empty-title">No Products Found</h3>
+          <p class="empty-message">There are no products available at the moment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

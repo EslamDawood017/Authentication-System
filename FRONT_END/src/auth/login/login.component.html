@@ -1,0 +1,84 @@
+<div class="login-container">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100 py-5">
+      <div class="col-lg-5 col-md-7 col-sm-10">
+        <div class="login-card">
+          <div class="login-header">
+            <h2 class="login-title">Welcome Back</h2>
+            <p class="login-subtitle">Sign in to continue to your account</p>
+          </div>
+          
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <!-- Username -->
+            <div class="form-group-wrapper">
+              <label class="form-label-custom" for="username">
+              Username
+              </label>
+              <input 
+                type="text" 
+                id="username"
+                class="form-control-custom" 
+                formControlName="username"
+                placeholder="Enter your username"
+                [ngClass]="{'is-invalid': submitted && f['username'].errors, 'is-valid': submitted && !f['username'].errors && f['username'].value}"
+              />
+              <div class="error-message" *ngIf="submitted && f['username'].errors">
+                <small *ngIf="f['username'].errors['required']">
+                Username is required
+                </small>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group-wrapper">
+              <label class="form-label-custom" for="password">
+              Password
+              </label>
+              <input 
+                type="password" 
+                id="password"
+                class="form-control-custom" 
+                formControlName="password"
+                placeholder="Enter your password"
+                [ngClass]="{'is-invalid': submitted && f['password'].errors, 'is-valid': submitted && !f['password'].errors && f['password'].value}"
+              />
+              <div class="error-message" *ngIf="submitted && f['password'].errors">
+                <small *ngIf="f['password'].errors['required']">
+                Password is required
+                </small>
+              </div>
+            </div>
+
+            <!-- Server Error Message -->
+            <div class="alert alert-danger-custom" *ngIf="errorMessage" role="alert">
+              <span class="alert-icon">⚠</span>
+              <span>{{ errorMessage }}</span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid mt-4">
+              <button 
+                type="submit" 
+                class="btn btn-login"
+                [disabled]="loginForm.invalid && submitted"
+              >
+                <span *ngIf="!submitted || loginForm.valid">Sign In</span>
+                <span *ngIf="submitted && loginForm.invalid">Please fix errors</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Register Link -->
+          <div class="login-footer">
+            <p class="text-center mb-0">
+              Don't have an account? 
+              <a href="/register" class="register-link">Create Account</a> <br>
+              <a href="/forgot-password" class="register-link">Forget Password</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

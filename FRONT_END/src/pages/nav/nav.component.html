@@ -1,0 +1,77 @@
+<!-- Navigation -->
+<nav class="custom-navbar navbar navbar-expand-lg fixed-top" [class.scrolled]="isScrolled">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand" (click)="router.navigate([''])" style="cursor: pointer;">
+      <div class="brand-wrapper">
+        <span class="brand-text">
+          <span class="brand-primary">Nexus</span>
+          <span class="brand-secondary">Platform</span>
+        </span>
+      </div>
+    </a>
+    
+    <!-- Mobile Toggle Button -->
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Navigation Menu -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" (click)="router.navigate([''])" style="cursor: pointer;">
+            <span class="nav-link-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#features">
+            <span class="nav-link-text">Features</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="router.navigate(['/dashboard'])">
+            <span class="nav-link-text">Products</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#pricing">
+            <span class="nav-link-text">Pricing</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">
+            <span class="nav-link-text">Contact</span>
+          </a>
+        </li>
+      </ul>
+      
+      <!-- Auth Buttons -->
+      <div class="nav-auth-buttons" *ngIf="!isLoginedIn">
+        <button class="btn-nav btn-login" (click)="onLogin()">
+          <span class="btn-text">Login</span>
+        </button>
+        <button class="btn-nav btn-register" (click)="onRegister()">
+          <span class="btn-text">Register</span>
+        </button>
+      </div>
+
+      <!-- Logout Button (when logged in) -->
+      <div class="nav-auth-buttons" *ngIf="isLoginedIn">
+        <button class="btn-nav btn-logout" (click)="Logout()">
+          <span class="btn-icon">🚪</span>
+          <span class="btn-text">Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+

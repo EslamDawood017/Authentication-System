@@ -1,0 +1,108 @@
+##################################################
+# Visual Studio / .NET
+##################################################
+
+## Ignore Visual Studio temporary files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+out/
+
+## .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+## Entity Framework
+*.mdf
+*.ldf
+
+## Logs
+*.log
+
+## NuGet
+*.nupkg
+packages/
+!packages/build/
+*.nuget.props
+*.nuget.targets
+
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+
+##################################################
+# Angular / Node.js
+##################################################
+
+## Node modules
+node_modules/
+
+## Angular build output
+dist/
+tmp/
+out-tsc/
+
+## Angular cache
+.angular/
+
+## Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## Environment files (optional)
+src/environments/*.local.ts
+
+## Package lock files (optional if team policy)
+# package-lock.json
+# yarn.lock
+
+##################################################
+# OS Files
+##################################################
+
+## Windows
+Thumbs.db
+Desktop.ini
+
+## macOS
+.DS_Store
+
+##################################################
+# Coverage / Testing
+##################################################
+
+coverage/
+*.coverage
+*.coveragexml
+
+##################################################
+# Docker
+##################################################
+
+docker-compose.override.yml
+
+##################################################
+# Misc
+##################################################
+
+.env
+.env.local
