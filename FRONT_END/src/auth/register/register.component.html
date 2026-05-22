@@ -5,24 +5,37 @@
         <div class="register-card">
           <div class="register-header">
             <h2 class="register-title">Create Account</h2>
-            <p class="register-subtitle">Join us today and start your journey</p>
+            <p class="register-subtitle">
+              Join us today and start your journey
+            </p>
           </div>
-          
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+
+          <form
+            [formGroup]="registerForm"
+            (ngSubmit)="onSubmit()"
+            class="register-form"
+          >
             <!-- Username -->
             <div class="form-group-wrapper">
               <label class="form-label-custom" for="username">
                 <i class="bi bi-person-fill"></i> Username
               </label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 id="username"
-                class="form-control-custom" 
+                class="form-control-custom"
                 formControlName="username"
                 placeholder="Enter your username"
-                [ngClass]="{'is-invalid': submitted && f['username'].errors, 'is-valid': submitted && !f['username'].errors && f['username'].value}"
+                [ngClass]="{
+                  'is-invalid': submitted && f['username'].errors,
+                  'is-valid':
+                    submitted && !f['username'].errors && f['username'].value,
+                }"
               />
-              <div class="error-message" *ngIf="submitted && f['username'].errors">
+              <div
+                class="error-message"
+                *ngIf="submitted && f['username'].errors"
+              >
                 <small *ngIf="f['username'].errors['required']">
                   <i class="bi bi-exclamation-circle"></i> Username is required
                 </small>
@@ -34,20 +47,25 @@
               <label class="form-label-custom" for="email">
                 <i class="bi bi-envelope-fill"></i> Email Address
               </label>
-              <input 
-                type="email" 
+              <input
+                type="email"
                 id="email"
-                class="form-control-custom" 
+                class="form-control-custom"
                 formControlName="email"
                 placeholder="Enter your email"
-                [ngClass]="{'is-invalid': submitted && f['email'].errors, 'is-valid': submitted && !f['email'].errors && f['email'].value}"
+                [ngClass]="{
+                  'is-invalid': submitted && f['email'].errors,
+                  'is-valid':
+                    submitted && !f['email'].errors && f['email'].value,
+                }"
               />
               <div class="error-message" *ngIf="submitted && f['email'].errors">
                 <small *ngIf="f['email'].errors['required']">
                   <i class="bi bi-exclamation-circle"></i> Email is required
                 </small>
                 <small *ngIf="f['email'].errors['email']">
-                  <i class="bi bi-exclamation-circle"></i> Please enter a valid email address
+                  <i class="bi bi-exclamation-circle"></i> Please enter a valid
+                  email address
                 </small>
               </div>
             </div>
@@ -57,23 +75,32 @@
               <label class="form-label-custom" for="password">
                 <i class="bi bi-lock-fill"></i> Password
               </label>
-              <input 
-                type="password" 
+              <input
+                type="password"
                 id="password"
-                class="form-control-custom" 
+                class="form-control-custom"
                 formControlName="password"
                 placeholder="Create a password"
-                [ngClass]="{'is-invalid': submitted && f['password'].errors, 'is-valid': submitted && !f['password'].errors && f['password'].value}"
+                [ngClass]="{
+                  'is-invalid': submitted && f['password'].errors,
+                  'is-valid':
+                    submitted && !f['password'].errors && f['password'].value,
+                }"
               />
-              <div class="error-message" *ngIf="submitted && f['password'].errors">
+              <div
+                class="error-message"
+                *ngIf="submitted && f['password'].errors"
+              >
                 <small *ngIf="f['password'].errors['required']">
                   <i class="bi bi-exclamation-circle"></i> Password is required
                 </small>
                 <small *ngIf="f['password'].errors['minlength']">
-                  <i class="bi bi-exclamation-circle"></i> Password must be at least 6 characters
+                  <i class="bi bi-exclamation-circle"></i> Password must be at
+                  least 6 characters
                 </small>
                 <small *ngIf="f['password'].errors['pattern']">
-                  <i class="bi bi-exclamation-circle"></i> Password must contain at least one digit
+                  <i class="bi bi-exclamation-circle"></i> Password must contain
+                  at least one digit
                 </small>
               </div>
             </div>
@@ -83,45 +110,68 @@
               <label class="form-label-custom" for="confirmPassword">
                 <i class="bi bi-lock-fill"></i> Confirm Password
               </label>
-              <input 
-                type="password" 
+              <input
+                type="password"
                 id="confirmPassword"
-                class="form-control-custom" 
+                class="form-control-custom"
                 formControlName="confirmPassword"
                 placeholder="Confirm your password"
-                [ngClass]="{'is-invalid': submitted && f['confirmPassword'].errors, 'is-valid': submitted && !f['confirmPassword'].errors && f['confirmPassword'].value}"
+                [ngClass]="{
+                  'is-invalid': submitted && f['confirmPassword'].errors,
+                  'is-valid':
+                    submitted &&
+                    !f['confirmPassword'].errors &&
+                    f['confirmPassword'].value,
+                }"
               />
-              <div class="error-message" *ngIf="submitted && f['confirmPassword'].errors">
+              <div
+                class="error-message"
+                *ngIf="submitted && f['confirmPassword'].errors"
+              >
                 <small *ngIf="f['confirmPassword'].errors['required']">
-                  <i class="bi bi-exclamation-circle"></i> Please confirm your password
+                  <i class="bi bi-exclamation-circle"></i> Please confirm your
+                  password
                 </small>
                 <small *ngIf="f['confirmPassword'].errors['mismatch']">
-                  <i class="bi bi-exclamation-circle"></i> Passwords do not match
+                  <i class="bi bi-exclamation-circle"></i> Passwords do not
+                  match
                 </small>
               </div>
             </div>
-            
+
             <!-- Success Message -->
-            <div class="alert alert-success-custom" *ngIf="successMessage" role="alert">
+            <div
+              class="alert alert-success-custom"
+              *ngIf="successMessage"
+              role="alert"
+            >
               <span class="alert-icon">✓</span>
               <span>{{ successMessage }}</span>
             </div>
 
             <!-- Server Error Message -->
-            <div class="alert alert-danger-custom" *ngIf="errorMessage" role="alert">
+            <div
+              class="alert alert-danger-custom"
+              *ngIf="errorMessage"
+              role="alert"
+            >
               <i class="bi bi-exclamation-triangle-fill"></i>
               <span>{{ errorMessage }}</span>
             </div>
 
             <!-- Submit Button -->
             <div class="d-grid mt-4">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 class="btn btn-register"
                 [disabled]="registerForm.invalid && submitted"
               >
-                <span *ngIf="!submitted || registerForm.valid">Create Account</span>
-                <span *ngIf="submitted && registerForm.invalid">Please fix errors</span>
+                <span *ngIf="!submitted || registerForm.valid"
+                  >Create Account</span
+                >
+                <span *ngIf="submitted && registerForm.invalid"
+                  >Please fix errors</span
+                >
               </button>
             </div>
           </form>
@@ -129,8 +179,8 @@
           <!-- Login Link -->
           <div class="register-footer">
             <p class="text-center mb-0">
-              Already have an account? 
-              <a href="/login" class="login-link">Sign In</a>
+              Already have an account?
+              <a routerLink="/login" class="login-link">Sign In</a>
             </p>
           </div>
         </div>

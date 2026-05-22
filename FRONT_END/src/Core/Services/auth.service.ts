@@ -10,30 +10,29 @@ import { Router } from '@angular/router';
 import { OtpVerification } from '../Models/OtpVerification';
 import { ResetPasswordRequest } from '../Models/ResetPasswordRequest';
 import { ResetPasswordResponse } from '../Models/ResetPasswordResponse';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  baseUrl = environment.apiUrl;
 
-  baseUrl = 'http://localhost:59980';
-  
   refreshTokenApi = `${this.baseUrl}/api/Auth/refresh-token`;
   registerApi = `${this.baseUrl}/api/Auth/register`;
-  LoginApi =  `${this.baseUrl}/api/Auth/login`;
+  LoginApi = `${this.baseUrl}/api/Auth/login`;
   ForgetPassword = `${this.baseUrl}/api/Auth/forgot-password`;
   OtpVerificationApi = `${this.baseUrl}/api/Auth/verify-otp`;
   resetPasswordApi = `${this.baseUrl}/api/Auth/reset-password`;
 
+  constructor(
+    private tokenService: TokenService,
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
-
-  constructor(private tokenService : TokenService ,
-     private http : HttpClient,
-    private router : Router) { }
-
-
-  register(payload : RegisterPayload) : Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(this.registerApi , payload)
+  register(payload: RegisterPayload): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(this.registerApi, payload);
   }
 
   login(payload: LoginPayload): Observable<LoginResponse> {
@@ -45,38 +44,45 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  forgotPassword(email : string) : Observable<{message : string}>{
-    return this.http.post<{message : string}>(this.ForgetPassword , {email : email})
-  }
-  
-  refreshToken(refreshToken: string): Observable<{ accessToken: string, refreshToken: string }> {
-  
-  const payload = { refreshToken : refreshToken };
-
- 
-  return this.http.post<{ accessToken: string, refreshToken: string }>(
-    this.refreshTokenApi, 
-    payload
-  ).pipe(
-    map(response => {
-      
-      return {
-        accessToken: response.accessToken,
-        refreshToken: response.refreshToken
-      };
-    }),
-    catchError(err => {
-      return throwError(() => err);
-    })
-  );
+  forgotPassword(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(this.ForgetPassword, {
+      email: email,
+    });
   }
 
-  verifyOtp( OtpVerification : OtpVerification){
-    return this.http.post<any>(this.OtpVerificationApi , OtpVerification);
+  refreshToken(
+    refreshToken: string,
+  ): Observable<{ accessToken: string; refreshToken: string }> {
+    const payload = { refreshToken: refreshToken };
+
+    return this.http
+      .post<{
+        accessToken: string;
+        refreshToken: string;
+      }>(this.refreshTokenApi, payload)
+      .pipe(
+        map((response) => {
+          return {
+            accessToken: response.accessToken,
+            refreshToken: response.refreshToken,
+          };
+        }),
+        catchError((err) => {
+          return throwError(() => err);
+        }),
+      );
   }
 
-  resetPassword(payload : ResetPasswordRequest) : Observable<ResetPasswordResponse>{
-    return this.http.post<ResetPasswordResponse>(this.resetPasswordApi , payload)
+  verifyOtp(OtpVerification: OtpVerification) {
+    return this.http.post<any>(this.OtpVerificationApi, OtpVerification);
   }
 
+  resetPassword(
+    payload: ResetPasswordRequest,
+  ): Observable<ResetPasswordResponse> {
+    return this.http.post<ResetPasswordResponse>(
+      this.resetPasswordApi,
+      payload,
+    );
+  }
 }
